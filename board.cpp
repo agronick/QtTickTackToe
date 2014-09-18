@@ -173,10 +173,10 @@ void Board::won(int state)
 {
     if(state == 1)
     {
-        spaces[1][1]->label->setText("You\nWin");
+        status->setText("You Win");
     }else if(state == 2)
     {
-       spaces[1][1]->label->setText("You\nLoose");
+       status->setText("You Loose");
     }
     playing = false;
 }
@@ -189,7 +189,7 @@ int Board::randInt(int low, int high)
 
 void Board::noWinner()
 {
-    spaces[1][1]->label->setText("Draw");
+    status->setText("Draw");
     playing = false;
 }
 

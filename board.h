@@ -19,8 +19,9 @@ public:
     bool checkArrEqual(int[],int);
     void setStatusLabel(QLabel*);
     void noWinner();
-    QString draw_str = "Draw";
     bool fillSpot(int);
+    bool playing = true;
+
 
     QLabel *status;
     ~Board();
