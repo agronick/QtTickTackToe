@@ -12,7 +12,7 @@ public:
     explicit Space(QObject *parent = 0);
     void setLabel(QPushButton*);
     bool computerTurn();
-    enum Status {N = 0, X = 1, O = 2};
+    enum Status {N = 0, X = 1, O = 2, Over = 3};
     int getState();
     void setCoords(int, int);
     int* getCoords();
@@ -21,6 +21,7 @@ public:
     QPushButton *label;
     int x;
     int y;
+    void setParent(Board*);
 
 
 signals:

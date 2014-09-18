@@ -5,7 +5,11 @@ Space::Space(QObject *parent) :
     QObject(parent)
 {
     state = N;
-    base = (Board*)parent;
+}
+
+void Space::setParent(Board *board)
+{
+    this->base = board;
 }
 
 void Space::setLabel(QPushButton *label)
@@ -18,11 +22,18 @@ void Space::setLabel(QPushButton *label)
 
 void Space::onClick()
 {
+    if(!base->playing)
+        return;
+
     if(state == N)
     {
         state = X;
         this->label->setText(" X ");
         base->checkWinner(1);
+
+        if(!base->playing)
+            return;
+
         base->computerTurn();
         base->checkWinner(2);
     }

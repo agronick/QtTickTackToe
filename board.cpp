@@ -13,7 +13,6 @@ Board::Board(QObject *parent) :
     QTime time = QTime::currentTime();
     qsrand((uint)time.msec());
     filled = 0;
-
 }
 
 Space *spaces[3][3];
@@ -25,11 +24,11 @@ void Board::setStatusLabel(QLabel *label)
 }
 
 
-
 void Board::setSpot(QPushButton *label, int x, int y)
 {
     qDebug() << QString::number(x) << "-" << QString::number(y);
     spaces[x][y] = new Space();
+    spaces[x][y]->setParent(this);
     spaces[x][y]->setLabel(label);
     spaces[x][y]->setCoords(x, y);
 }
@@ -172,7 +171,6 @@ bool Board::checkArrEqual(int a[], int  n)
 
 void Board::won(int state)
 {
-    qDebug() << state << "  won";
     if(state == 1)
     {
         spaces[1][1]->label->setText("You\nWin");
@@ -180,6 +178,7 @@ void Board::won(int state)
     {
        spaces[1][1]->label->setText("You\nLoose");
     }
+    playing = false;
 }
 
 int Board::randInt(int low, int high)
@@ -190,8 +189,8 @@ int Board::randInt(int low, int high)
 
 void Board::noWinner()
 {
-     spaces[1][1]->label->setText("Draw");
-
+    spaces[1][1]->label->setText("Draw");
+    playing = false;
 }
 
 Board::~Board()
@@ -205,3 +204,5 @@ Board::~Board()
         }
     }
 }
+
+
